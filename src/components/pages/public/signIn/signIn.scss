@@ -1,4 +1,4 @@
-.signin{
+.signin {
     background: url("../../../../assets/signinbackground.png") no-repeat center;
     background-size: cover;
     height: 100vh;
@@ -6,16 +6,15 @@
     padding: 30px;
 }
 
-.signin_title{
+.signin_title {
     margin-top: 10px;
-
 }
 
-.signin_title h1{
+.signin_title h1 {
     font-size: 32px;
     font-weight: 700;
     line-height: 52px;
-    color: #1a1a1a; 
+    color: #1a1a1a;
 }
 
 .signin_buttons {
@@ -25,8 +24,8 @@
     justify-content: space-between;
 }
 
-.signin_buttons button{
-    background-color:#F3F4F5;
+.signin_buttons button {
+    background-color: #f3f4f5;
     width: 150px;
     color: #1a1a1a;
     font-weight: 400;
@@ -36,52 +35,46 @@
     border-radius: 10px;
 }
 
-.signin_input{
+.signin_input {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 24px;
     position: relative;
-
 }
 
-.signin_input label{
+.signin_input label {
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
     color: #1a1a1a;
-
 }
 
-
-
-.signin_input input{
+.signin_input input {
     border: 1px solid rgba($color: #1a1a1a, $alpha: 0.1);
     margin-top: 8px;
     border-radius: 10px;
     padding: 14px;
     font-size: 14px;
     color: #1a1a1a;
-
 }
 
-.signin_input img{
+.signin_input img {
     position: absolute;
     bottom: 42px;
     right: 14px;
     opacity: 0.2;
 }
 
-.signin_input input::placeholder{
+.signin_input input::placeholder {
     opacity: 0.2;
 }
 
-.signin_main{
+.signin_main {
     margin-top: 60px;
-
 }
 
-.signin_main button{
+.signin_main button {
     width: 315px;
     border-radius: 10px;
     height: 50px;
@@ -93,26 +86,110 @@
     line-height: 21px;
 }
 
-.signin_input a{
-
+.signin_input a {
     text-align: right;
     margin-top: 5px;
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
     text-decoration: none;
-    color: #1A87DD !important;
-    
-
+    color: #1a87dd !important;
 }
-.signin_create{
-
+.signin_create {
     text-align: center;
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
-    color: #1A87DD;
+    color: #1a87dd;
     display: flex;
     justify-content: center;
     margin-top: 15px;
+}
+
+.forget_password {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: #1a87dd;
+}
+.signin_password {
+    margin-bottom: 10px;
+}
+.total_send {
+    border-radius: 10px;
+    background: #f3f4f5;
+    height: 50px;
+    margin: 24px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.total_send h3 {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+.total_send span {
+    color: #f8bb18;
+}
+.sendm_main {
+    padding: 15px;
+}
+.request_btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+}
+.send_btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    background: #f8bb18;
+}
+.sendall_btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 20px 20px 0px 0px;
+    background: #fff;
+    box-shadow: 0px -10px 10px 0px rgba(0, 0, 0, 0.03);
+}
+.sendall_btn a {
+    border-radius: 10px;
+    background: #f8bb18;
+    width: 100%;
+    height: 100%;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px; /* 150% */
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import Language from "../../../../assets/language.svg";
 import Location from "../../../../assets/location.svg";
@@ -7,7 +7,12 @@ import Tel from "../../../../assets/tel.svg";
 import Logout from "../../../../assets/logout.svg";
 
 import "./setting.scss";
+import { useDispatch } from "react-redux";
+import { removeJwtToken } from "../../../../store/actions/authActions";
 function Setting() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const data = [
         {
             titleBlock: "General",
@@ -51,7 +56,10 @@ function Setting() {
                     icon: Logout,
                     title: "Logout",
                     subtitle: "",
-                    onClick: () => {},
+                    onClick: () => {
+                        dispatch(removeJwtToken());
+                        navigate("/signin");
+                    },
                 },
             ],
         },

@@ -131,7 +131,7 @@ function ContactCard({ avatar, username, fullName }) {
                 <Link
                     className='contact_send'
                     to='/sendmoney'
-                    state={{ info: { avatar, username, fullName } }}
+                    state={{ info: { avatar, username } }}
                 >
                     <svg
                         width='12'
@@ -149,7 +149,7 @@ function ContactCard({ avatar, username, fullName }) {
                 <Link
                     className='contact_request'
                     to='/requestmoney'
-                    state={{ info: { avatar, username, fullName } }}
+                    state={{ info: { avatar, username } }}
                 >
                     <svg
                         width='12'

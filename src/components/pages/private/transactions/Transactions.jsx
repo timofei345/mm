@@ -26,6 +26,7 @@ function Transactions() {
     });
 
     const filteredTransactions = sortedTransactions.filter((item) => {
+        console.log(item.incomes);
         return transactionType === "incomes"
             ? item.trType === "send"
             : item.trType === "request";

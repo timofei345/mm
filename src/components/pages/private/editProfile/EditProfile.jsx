@@ -4,20 +4,36 @@ import { Link } from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import InputField from "../../../inputField/InputField";
 
-import "./editprofile.scss";
+import { useImgBBUpload } from "../../../../hooks/http.hook";
 import useService from "../../../../services/requests";
+
+import "./editprofile.scss";
 
 function EditProfile() {
     const [file, setFile] = useState();
     const [data, setData] = useState({});
     const { PUT_ME } = useService();
+    const { uploadImage } = useImgBBUpload();
 
     const handleSubmit = () => {
         console.log(data);
-        PUT_ME(data).then((res) => {
-            console.log(res);
-        });
+        PUT_ME(data);
     };
+
+    const handleImageUpload = async (event) => {
+        const file = event.target.files[0];
+        setFile(URL.createObjectURL(file));
+
+        if (file) {
+            try {
+                const result = await uploadImage(file);
+                setData({ ...data, avatar: result.data.display_url });
+            } catch (error) {
+                console.error("Error uploading image:", error.message);
+            }
+        }
+    };
+
     return (
         <section className='body_container'>
             <HeaderPrivate title='Edit Profile' />
@@ -70,12 +86,8 @@ function EditProfile() {
                         <h1>Upload Image</h1>
                         <input
                             type='file'
-                            onChange={(e) => {
-                                setFile(URL.createObjectURL(e.target.files[0]));
-                                setData({
-                                    ...data,
-                                    avatar: e.target.files[0].name,
-                                });
+                            onChange={(event) => {
+                                handleImageUpload(event);
                             }}
                         />
                     </div>

@@ -2,6 +2,7 @@
     display: flex;
     margin-bottom: 32px;
     flex-direction: column;
+    position: relative;
 }
 .input_block label {
     color: #1a1a1a;
@@ -21,4 +22,10 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 24px; /* 150% */
+}
+.input_block img {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.4;
 }

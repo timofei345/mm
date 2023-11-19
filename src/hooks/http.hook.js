@@ -24,3 +24,33 @@ export const useHttp = () => {
 
     return { request };
 }
+
+
+export const useImgBBUpload = () => {
+
+    const uploadImage = useCallback(async (image) => {
+
+        const formData = new FormData();
+        formData.append('key', "5b6820e63f1e06d385d3b9c831efcee6");
+        formData.append('image', image);
+
+        try {
+            const response = await fetch('https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Could not upload image, status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }, []);
+
+    return { uploadImage };
+};

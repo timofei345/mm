@@ -1,25 +1,30 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "../../../headerDashboard/Header";
-import { CheckAuthUser } from "../../../../utils/checkAuthUser";
-import Navbar from "../../../navbar/Navbar";
-import Dashboardimage from "../../../../assets/dashboardimage.svg";
-import { Link } from "react-router-dom";
-import Sendmoney from "../../../../assets/sendmoney.png";
-import Requestmoney from "../../../../assets/requestmoney.png";
-import "./dashboard.scss";
-import TransactionsCard from "../../../transactionsCard/TransactionsCard";
-import useService from "../../../../services/requests";
+import React, { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
+import Header from "../../../headerDashboard/Header";
+import Navbar from "../../../navbar/Navbar";
+import TransactionsCard from "../../../transactionsCard/TransactionsCard";
+
+import { CheckAuthUser } from "../../../../utils/checkAuthUser";
+import useService from "../../../../services/requests";
 import { removeJwtToken } from "../../../../store/actions/authActions";
+
+import Dashboardimage from "../../../../assets/dashboardimage.svg";
+import Requestmoney from "../../../../assets/requestmoney.png";
+import Sendmoney from "../../../../assets/sendmoney.png";
+
+import "./dashboard.scss";
 
 function App() {
     const [transactions, setTransactions] = useState([]);
+    const [sendPerson, setSendPerson] = useState([]);
     const [headerDate, setHeaderDate] = useState({});
     const navigate = useNavigate();
     const { GET_ME } = useService();
     const dispatch = useDispatch();
     const validateToken = CheckAuthUser();
+
     useEffect(() => {
         const onboarding = localStorage.getItem("onboarding");
         if (validateToken === false) {
@@ -27,7 +32,6 @@ function App() {
         }
         if (!onboarding) {
             navigate("/onboarding");
-            console.log("yes");
         }
     });
 
@@ -35,23 +39,36 @@ function App() {
         GET_ME()
             .then((res) => {
                 setTransactions(res.transactions);
-                setHeaderDate({ amount: res.balance, name: res.username });
+                setHeaderDate({
+                    amount: res.balance,
+                    name: res.username,
+                    avatar: res.avatar,
+                });
             })
             .catch(() => {
                 dispatch(removeJwtToken());
             });
     }, []);
 
+    useEffect(() => {
+        setSendPerson(transactions.filter((item) => item.trType === "send"));
+    }, [transactions]);
+
+    console.log(sendPerson);
     return (
         <>
             <Header date={headerDate} />
             <div className='dashboard'>
                 <div className='dashboard_buttons'>
-                    <Link className='sendmoney' to='/send'>
+                    <Link
+                        className='sendmoney'
+                        to='/send'
+                        state={{ sendPerson }}
+                    >
                         <img src={Sendmoney} alt='sendmoneyimg' />
                         Send money
                     </Link>
-                    <Link className='requestmoney' to='/request'>
+                    <Link className='requestmoney' to='/contact'>
                         <img src={Requestmoney} alt='requestmoneyimg' />
                         Request money
                     </Link>

@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import Navbar from "../../../navbar/Navbar";
+
+import useService from "../../../../services/requests";
+
 import Profiles from "../../../../assets/profile_profile.svg";
 import Card from "../../../../assets/profile_card.svg";
 import Setting from "../../../../assets/profile_setting.svg";
 import Help from "../../../../assets/profile_help.svg";
-import { Link } from "react-router-dom";
-import Navbar from "../../../navbar/Navbar";
+
 import "./profile.scss";
 
 function Profile() {
+    const [avatar, setAvatar] = useState("");
+    const [name, setName] = useState("");
+    const { GET_ME } = useService();
+
+    useEffect(() => {
+        GET_ME().then((res) => {
+            setAvatar(res.avatar);
+            setName(res.username);
+            // setFirstLetter(res.username[0]);
+        });
+    }, []);
+    const firstLetter = name ? name[0] : "A";
     const profileItem = [
         {
             img: <Profiles />,
             title: "My Info",
-            path: "/info",
         },
         {
             img: <Card />,
@@ -22,12 +38,11 @@ function Profile() {
         {
             img: <Setting />,
             title: "Settings",
-            path: "/settings",
+            path: "/setting",
         },
         {
             img: <Help />,
             title: "Help",
-            path: "/help",
         },
     ];
 
@@ -53,50 +68,51 @@ function Profile() {
                 </div>
                 <div className='profile_name'>
                     <div className='profile_img'>
-                        {true ? (
-                            <img
-                                src='https://picsum.photos/200'
-                                alt='profile'
-                            />
+                        {avatar === "any" || !avatar ? (
+                            <div className='transactions_avatar-letter'>
+                                <p>{firstLetter.toUpperCase()}</p>
+                            </div>
                         ) : (
-                            <h3>N</h3>
+                            <img src={avatar} alt='avatar' />
                         )}
                     </div>
-                    <h1>Profile Name</h1>
+                    <h1>{name}</h1>
                 </div>
             </div>
             <div className='profile_body'>
                 {profileItem.map((item, index) => {
                     return (
-                        <div key={index} className='profile_item'>
+                        <Link
+                            to={item.path}
+                            key={index}
+                            className='profile_item'
+                        >
                             <div className='pritem_info'>
                                 <img src={item.img.type} alt='' />
                                 <h3>{item.title}</h3>
                             </div>
                             <div className='profile_link'>
-                                <Link to={item.path}>
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='24'
-                                        height='24'
-                                        viewBox='0 0 24 24'
-                                        fill='none'
-                                    >
-                                        <g opacity='0.01'>
-                                            <rect
-                                                width='24'
-                                                height='24'
-                                                fill='#F7F9FC'
-                                            />
-                                        </g>
-                                        <path
-                                            d='M9.21967 16.2197C8.92678 16.5126 8.92678 16.9874 9.21967 17.2803C9.51256 17.5732 9.98744 17.5732 10.2803 17.2803L15.2803 12.2803C15.5732 11.9874 15.5732 11.5126 15.2803 11.2197L10.2803 6.21967C9.98744 5.92678 9.51256 5.92678 9.21967 6.21967C8.92678 6.51256 8.92678 6.98744 9.21967 7.28033L13.6893 11.75L9.21967 16.2197Z'
-                                            fill='black'
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='24'
+                                    height='24'
+                                    viewBox='0 0 24 24'
+                                    fill='none'
+                                >
+                                    <g opacity='0.01'>
+                                        <rect
+                                            width='24'
+                                            height='24'
+                                            fill='#F7F9FC'
                                         />
-                                    </svg>
-                                </Link>
+                                    </g>
+                                    <path
+                                        d='M9.21967 16.2197C8.92678 16.5126 8.92678 16.9874 9.21967 17.2803C9.51256 17.5732 9.98744 17.5732 10.2803 17.2803L15.2803 12.2803C15.5732 11.9874 15.5732 11.5126 15.2803 11.2197L10.2803 6.21967C9.98744 5.92678 9.51256 5.92678 9.21967 6.21967C8.92678 6.51256 8.92678 6.98744 9.21967 7.28033L13.6893 11.75L9.21967 16.2197Z'
+                                        fill='black'
+                                    />
+                                </svg>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { setJwtToken } from "../../../../store/actions/authActions";
 import useService from "../../../../services/requests";
+
+import InputField from "../../../inputField/InputField";
+
+import { setJwtToken } from "../../../../store/actions/authActions";
 
 import Eye from "../../../../assets/eye.png";
 
@@ -46,32 +49,25 @@ function SignIn() {
                         e.preventDefault();
                     }}
                 >
-                    <div className='signin_input'>
-                        <label>Email</label>
-
-                        <input
-                            placeholder='Enter your email'
-                            type='text'
-                            value={name}
-                            onChange={(e) => {
-                                setName(e.target.value);
-                            }}
-                        />
-                    </div>
-
-                    <div className='signin_input'>
-                        <label>Password</label>
-                        <input
-                            placeholder='Enter your password'
-                            type='password'
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                        />
-                        <img src={Eye} alt='eye' />
-                        <a href='javascript();'>Forget password?</a>
-                    </div>
+                    <InputField
+                        label='Email'
+                        type='email'
+                        placeholder='Enter your email'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <InputField
+                        label='Password'
+                        type='password'
+                        placeholder='Enter your password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        icon={Eye}
+                        className={"signin_password"}
+                    />
+                    <Link className='forget_password' to='/resetpassword'>
+                        Forget password?
+                    </Link>
 
                     <button onClick={handleSubmit}>Login</button>
                 </form>

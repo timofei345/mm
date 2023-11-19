@@ -1,10 +1,11 @@
 import React from "react";
-import ProfilePicture from "../../assets/profilepicture.png";
+
 import NotificationsIcon from "../../assets/notificationsicon.svg";
+
 import "./header.scss";
 
 function Header({ date }) {
-    console.log(date);
+    const firstLetter = date.name ? date.name[0] : "A";
     return (
         <div className='header_dashboard'>
             <div className='header_top'>
@@ -13,7 +14,13 @@ function Header({ date }) {
                 </div>
 
                 <div className='profile_picture'>
-                    <img src={ProfilePicture} alt='profile_picture' />
+                    {date.avatar === "any" || !date.avatar ? (
+                        <div className='transactions_avatar-letter'>
+                            <p>{firstLetter.toUpperCase()}</p>
+                        </div>
+                    ) : (
+                        <img src={date.avatar} alt='avatar' />
+                    )}
                 </div>
             </div>
             <div className='header_bot'>

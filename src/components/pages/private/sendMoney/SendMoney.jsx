@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import "./sendMoney.scss";
 import useService from "../../../../services/requests";
@@ -9,15 +9,14 @@ import ModalSuccess from "../../../modal/Modal";
 import { SendTransactions } from "../../../../utils/sendTransactions";
 
 function SendMoney() {
-   
     const [open, setOpen] = useState(false);
-
     const [amount, setAmount] = useState();
     const [note, setNote] = useState("");
     const [amountError, setAmountError] = useState(false);
     const { state } = useLocation();
     const { POST_TRANSACTIONS } = useService();
-    const firstLetter = state.info.username.charAt(0).toUpperCase();
+    const navigate = useNavigate();
+    const firstLetter = state.info.username ? state.info.username[0] : "A";
 
     const handleSubmit = () => {
         if (!amount) {
@@ -31,19 +30,16 @@ function SendMoney() {
             type: "send",
         };
         const result = SendTransactions(date);
-        POST_TRANSACTIONS(result).then((res) => {
+        POST_TRANSACTIONS(result).then(() => {
             setOpen(true);
-
-        
         });
     };
+
     return (
         <section className='body_container sendm'>
-          
-
             <ModalSuccess open={open} onClose={() => setOpen(false)} />
             <HeaderPrivate title='Send Money' />
-            <div className='get_back'>
+            <button onClick={() => navigate(-1)} className='get_back'>
                 <svg
                     width='16'
                     height='13'
@@ -56,7 +52,7 @@ function SendMoney() {
                         fill='black'
                     />
                 </svg>
-            </div>
+            </button>
             <div className='detail_card-info'>
                 <div className='detail_card_avatar'>
                     {state.info.avatar ? (

@@ -19,7 +19,6 @@ import ErrorPage from "./pages/errors/ErrorPage";
 import appStyle from "../scss/app.scss";
 import Start from "./pages/public/Start/Start";
 import Contact from "./pages/private/contact/Contact";
-import Request from "./pages/private/request/Request";
 import Send from "./pages/private/send/Send";
 import RequestMoney from "./pages/private/requestMoney/RequestMoney";
 import SendMoney from "./pages/private/sendMoney/SendMoney";
@@ -74,10 +73,7 @@ function App() {
       element: <Contact />,
       path: '/contact'
     },
-    {
-      element: <Request />,
-      path: '/request'
-    },
+
     {
       element: <Send />,
       path: '/send'

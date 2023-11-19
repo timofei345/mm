@@ -2,16 +2,23 @@ import classNames from "classnames";
 import "./transactionsCard.scss";
 
 function TransactionsCard({ avatar, name, date, amount, type, trType }) {
+    const firstLetter = name ? name[0] : "A";
     return (
         <div className='transactions_card'>
             <div className='transactions_card-inner'>
                 <div className='transactions_avatar'>
-                    <img src={avatar} alt='avatar' />
+                    {avatar === "any" || !avatar ? (
+                        <div className='transactions_avatar-letter'>
+                            <p>{firstLetter.toUpperCase()}</p>
+                        </div>
+                    ) : (
+                        <img src={avatar} alt='avatar' />
+                    )}
                     {type ? (
                         <div
                             className={classNames("transactions_type", {
-                                type_operation_down: type === "down",
-                                type_operation_up: type === "up",
+                                type_operation_down: type === "request",
+                                type_operation_up: type === "send",
                             })}
                         >
                             <svg
@@ -38,7 +45,9 @@ function TransactionsCard({ avatar, name, date, amount, type, trType }) {
                 </div>
             </div>
             <div className='transactions_amount'>
-                <span>{trType ? `+ ${amount}$` : `- ${amount}$`}</span>
+                <span>
+                    {trType === "send" ? `- ${amount}$` : `+ ${amount}$`}
+                </span>
             </div>
         </div>
     );

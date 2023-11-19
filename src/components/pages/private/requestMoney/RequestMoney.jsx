@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import "./RequestMoney.scss";
 import ModalSuccess from "../../../modal/Modal";
@@ -13,6 +13,7 @@ function RequestMoney() {
     const [amountError, setAmountError] = useState(false);
     const { state } = useLocation();
     const { POST_TRANSACTIONS } = useService();
+    const navigate = useNavigate();
     const firstLetter = state.info.username.charAt(0).toUpperCase();
 
     const handleSubmit = () => {
@@ -36,7 +37,7 @@ function RequestMoney() {
             <ModalSuccess open={open} onClose={() => setOpen(false)} />
 
             <HeaderPrivate title='Request Money' />
-            <div className='get_back'>
+            <button onClick={() => navigate(-1)} className='get_back'>
                 <svg
                     width='16'
                     height='13'
@@ -49,7 +50,7 @@ function RequestMoney() {
                         fill='black'
                     />
                 </svg>
-            </div>
+            </button>
             <div className='detail_card-info'>
                 <div className='detail_card_avatar'>
                     {state.info.avatar ? (
@@ -62,7 +63,7 @@ function RequestMoney() {
                 </div>
                 <div className='transaction_info'>
                     <div className='transactions_name'>
-                        <h3>{state.info.name}</h3>
+                        <h3>{state.info.username}</h3>
                     </div>
                     <div className='transactions_date'>
                         <p>{state.info.email}</p>

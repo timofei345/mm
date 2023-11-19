@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import useService from "../../../../services/requests";
-import { Link, useNavigate } from "react-router-dom";
-import "./signUp.scss";
+import InputField from "../../../inputField/InputField";
+
 import { setJwtToken } from "../../../../store/actions/authActions";
-import { useDispatch } from "react-redux";
+
+import Eye from "../../../../assets/eye.png";
+
+import "./signUp.scss";
 
 function SignUP() {
     const [name, setName] = useState("");
@@ -15,18 +20,14 @@ function SignUP() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleDataChange = (e, setData) => {
-        setData(e.target.value);
-    };
-
     const handleSubmit = () => {
         const formData = {
             username: name,
             password: password,
             confirm_password: confirmPassword,
         };
+
         POST_REG_USER(formData).then((res) => {
-            console.log(res.jwt);
             dispatch(setJwtToken(res.jwt));
             navigate("/");
         });
@@ -50,41 +51,31 @@ function SignUP() {
                         e.preventDefault();
                     }}
                 >
-                    <div className='signup_input'>
-                        <label>Email</label>
-                        <input
-                            placeholder='Enter your email'
-                            type='text'
-                            value={name}
-                            onChange={(e) => {
-                                handleDataChange(e, setName);
-                            }}
-                        />
-                    </div>
+                    <InputField
+                        label='Email'
+                        type='email'
+                        placeholder='Enter your email'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
 
-                    <div className='signup_input'>
-                        <label>Password</label>
-                        <input
-                            placeholder='Enter your password'
-                            type='password'
-                            value={password}
-                            onChange={(e) => {
-                                handleDataChange(e, setPassword);
-                            }}
-                        />
-                    </div>
+                    <InputField
+                        label='Password'
+                        type='password'
+                        placeholder='Enter your password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        icon={Eye}
+                    />
 
-                    <div className='signup_input'>
-                        <label>Renter password</label>
-                        <input
-                            placeholder='Enter your password again'
-                            type='password'
-                            value={confirmPassword}
-                            onChange={(e) => {
-                                handleDataChange(e, setConfirmPassword);
-                            }}
-                        />
-                    </div>
+                    <InputField
+                        label='Renter password'
+                        type='password'
+                        placeholder='Enter your password again'
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        icon={Eye}
+                    />
                     <button onClick={handleSubmit}>Create account</button>
                 </form>
                 <Link to='/signin' className='signup_create'>

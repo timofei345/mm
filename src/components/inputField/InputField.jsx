@@ -1,4 +1,6 @@
+import cn from "classnames";
 import "./inputField.scss";
+import { useState } from "react";
 
 function InputField({
     label,
@@ -8,17 +10,30 @@ function InputField({
     className,
     value,
     maxLength,
+    icon,
 }) {
+    const [inputType, setInputType] = useState(type);
     return (
-        <div className={`input_block ${className}`}>
+        <div className={cn("input_block", className)}>
             <label>{label}</label>
             <input
-                type={type}
+                type={inputType}
                 placeholder={placeholder}
                 onChange={onChange}
                 value={value}
                 maxLength={maxLength}
             />
+            {icon && (
+                <img
+                    src={icon}
+                    alt='icon'
+                    onClick={() => {
+                        setInputType((prevType) =>
+                            prevType === "text" ? "password" : "text"
+                        );
+                    }}
+                />
+            )}
         </div>
     );
 }

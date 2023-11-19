@@ -1,45 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import "./send.scss";
+import { useState } from "react";
 
 function Send() {
-    const contacts = [
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "John Smith",
-            email: "john.smith@example.com",
+    const [transactionType] = useState("incomes");
+    const navigate = useNavigate();
+    const { state } = useLocation();
+    console.log(state.sendPerson);
+
+    const sortedTransactions = [...state.sendPerson].sort((a, b) => {
+        const dateA = new Date(a.trDate.split(".").reverse().join("-"));
+        const dateB = new Date(b.trDate.split(".").reverse().join("-"));
+
+        return dateB - dateA; // Sorting in descending order, change to dateA - dateB for ascending
+    });
+
+    const filteredTransactions = sortedTransactions.filter((item) => {
+        return transactionType === "incomes"
+            ? item.trType === "send"
+            : item.trType === "request";
+    });
+
+    const transactionsByMonth = filteredTransactions.reduce(
+        (acc, transaction) => {
+            const monthYear = transaction.trDate.split(".").slice(1).join("-");
+            acc[monthYear] = acc[monthYear] || [];
+            acc[monthYear].push(transaction);
+            return acc;
         },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "Alice Johnson",
-            email: "alice.johnson@example.com",
-        },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "Bob Williams",
-            email: "bob.williams@example.com",
-        },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "Sarah Davis",
-            email: "sarah.davis@example.com",
-        },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "Michael Brown",
-            email: "michael.brown@example.com",
-        },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "Linda Miller",
-            email: "linda.miller@example.com",
-        },
-        {
-            avatar: "https://i.pravatar.cc/300",
-            name: "David Wilson",
-            email: "david.wilson@example.com",
-        },
-    ];
+        {}
+    );
     return (
         <div className='body_container'>
             <HeaderPrivate title='Send Money' />
@@ -65,16 +56,29 @@ function Send() {
                 </h3>
             </div>
             <div className='sendm_main'>
-                {contacts.map((item, index) => {
-                    return (
-                        <ContactCard
-                            key={index}
-                            name={item.name}
-                            avatar={item.avatar}
-                            email={item.email}
-                        />
-                    );
-                })}
+                {Object.entries(transactionsByMonth).map(
+                    ([monthYear, monthTransactions]) => (
+                        <div key={monthYear} className='month-section'>
+                            <h3>
+                                {new Date(
+                                    monthYear.split("-")[1],
+                                    monthYear.split("-")[0] - 1
+                                ).toLocaleString("en-US", {
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </h3>
+                            {monthTransactions.map((item, index) => (
+                                <ContactCard
+                                    key={`${monthYear}-${index}`}
+                                    username={item.userName}
+                                    avatar={item.userAvatar}
+                                    balance={item.amount}
+                                />
+                            ))}
+                        </div>
+                    )
+                )}
             </div>
             <div className='sendall_btn'>
                 <Link>
@@ -97,7 +101,7 @@ function Send() {
     );
 }
 
-function ContactCard({ avatar, name, email }) {
+function ContactCard({ avatar, username, balance }) {
     return (
         <div className='transactions_card'>
             <div className='transactions_card-inner'>
@@ -106,15 +110,19 @@ function ContactCard({ avatar, name, email }) {
                 </div>
                 <div className='transaction_info'>
                     <div className='transactions_name'>
-                        <h3>{name}</h3>
+                        <h3>{username}</h3>
                     </div>
                     <div className='transactions_date'>
-                        <p>{email}</p>
+                        <p>-${balance}</p>
                     </div>
                 </div>
             </div>
             <div className='send_btn'>
-                <Link className='contact_request' to='/send-money'>
+                <Link
+                    className='contact_request'
+                    to='/sendmoney'
+                    state={{ info: { avatar, username, balance } }}
+                >
                     <svg
                         width='12'
                         height='12'
