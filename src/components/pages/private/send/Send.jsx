@@ -1,13 +1,12 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import "./send.scss";
 import { useState } from "react";
 
 function Send() {
     const [transactionType] = useState("incomes");
-    const navigate = useNavigate();
     const { state } = useLocation();
-    console.log(state.sendPerson);
+
 
     const sortedTransactions = [...state.sendPerson].sort((a, b) => {
         const dateA = new Date(a.trDate.split(".").reverse().join("-"));

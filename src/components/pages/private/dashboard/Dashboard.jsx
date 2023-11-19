@@ -54,7 +54,7 @@ function App() {
         setSendPerson(transactions.filter((item) => item.trType === "send"));
     }, [transactions]);
 
-    console.log(sendPerson);
+    
     return (
         <>
             <Header date={headerDate} />

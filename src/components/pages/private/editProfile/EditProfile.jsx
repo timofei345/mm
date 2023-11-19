@@ -16,7 +16,7 @@ function EditProfile() {
     const { uploadImage } = useImgBBUpload();
 
     const handleSubmit = () => {
-        console.log(data);
+
         PUT_ME(data);
     };
 
