@@ -1,0 +1,59 @@
+.header_dashboard {
+    background: url("../../assets/backgroundheader.png") no-repeat center;
+    background-size: cover;
+    padding: 20px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 111;
+}
+
+.header_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_name p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+    margin-top: 13px;
+    color: #ffffff;
+}
+
+.profile_picture {
+    width: 40px;
+    height: 40px;
+}
+
+.header_bot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.dashboard_text h6 {
+    opacity: 0.5;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    color: #ffffff;
+}
+
+.dashboard_text h3 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+}
+
+.dashboard_text h1 {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 40px;
+}

@@ -1,0 +1,118 @@
+.signup{
+    background: url("../../../../assets/signinbackground.png") no-repeat center;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    padding: 30px;
+}
+
+.signup_title{
+    margin-top: 10px;
+
+}
+
+.signup_title h1{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 52px;
+    color: #1a1a1a; 
+}
+
+.signup_buttons {
+    margin-top: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signup_buttons button{
+    background-color:#F3F4F5;
+    width: 150px;
+    color: #1a1a1a;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 16px 0;
+    border-radius: 10px;
+}
+
+.signup_input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    position: relative;
+
+}
+
+.signup_input label{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #1a1a1a;
+
+}
+
+
+
+.signup_input input{
+    border: 1px solid rgba($color: #1a1a1a, $alpha: 0.1);
+    margin-top: 8px;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    color: #1a1a1a;
+
+}
+
+.signup_input img{
+    position: absolute;
+    bottom: 42px;
+    right: 14px;
+    opacity: 0.2;
+}
+
+.signup_input input::placeholder{
+    opacity: 0.2;
+}
+
+.signup_main{
+    margin-top: 60px;
+
+}
+
+.signup_main button{
+    width: 315px;
+    border-radius: 10px;
+    height: 50px;
+    margin-top: 50px;
+    background: #1a87dd;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.signup_input a{
+
+    text-align: right;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: none;
+    color: #1A87DD !important;
+    
+
+}
+.signup_create{
+
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #1A87DD;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

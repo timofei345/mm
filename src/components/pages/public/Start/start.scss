@@ -1,0 +1,68 @@
+.btn_primary {
+    width: 100%;
+    border-radius: 15px;
+    height: 50px;
+    margin: 0 auto;
+    background: #1a87dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.top img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.top {
+    display: flex;
+    padding-top: 170px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.top p {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    color: #fff;
+}
+
+.top p b {
+    font-weight: 600;
+}
+
+.container {
+    background: url("../../../../assets/signinpagebackground.png") no-repeat
+        center;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.bot {
+    position: absolute;
+    bottom: 32px;
+    width: 315px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn_outline {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #1a87dd;
+}

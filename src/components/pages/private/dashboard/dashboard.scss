@@ -1,0 +1,65 @@
+.dashboard {
+    padding: 0 15px;
+    padding-top: 245px;
+    // height: 100vh;
+}
+.dashboard_buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard_buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 4px;
+    width: 165px;
+    height: 49px;
+    border-radius: 10px;
+}
+
+.sendmoney {
+    background: #f8bb18;
+    color: #1a1a1a;
+}
+
+.requestmoney {
+    color: #ffffff;
+    background: #1a87dd;
+}
+
+.dashboard_body {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 0;
+}
+
+.dashboard_textq {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard_last_trasactions {
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+.dashboard_transactionsHistory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.dashboard_transactionsHistory p {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    text-align: center;
+    opacity: 50%;
+    margin-top: 16px;
+}

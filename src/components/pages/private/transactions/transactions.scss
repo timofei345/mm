@@ -1,0 +1,79 @@
+.body_container {
+    position: relative;
+}
+.transaction_top {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+}
+.transactions_body {
+    padding: 0 15px;
+}
+.transactions_buttons {
+    padding: 5px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 24px;
+    background: #f3f4f5;
+}
+
+.button_incomes {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    color: #1a1a1a;
+    width: 165px;
+    display: flex;
+    z-index: 2;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 49px;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.transaction_expenses {
+    background: #f8bb18;
+    width: 50%;
+    height: 49px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+
+    left: 50%;
+    right: 0;
+    z-index: 1;
+    transition: 0.2s ease-in-out;
+}
+.transaction_incomes {
+    left: 2%;
+}
+
+.button_expenses {
+    width: 165px;
+    height: 49px;
+    font-weight: 400;
+    z-index: 2;
+    position: relative;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    border-radius: 10px;
+}
+
+.transactions_history {
+    margin-top: 16px;
+    padding-bottom: 120px;
+}
+.actual_date {
+    margin-top: 24px;
+}

@@ -1,0 +1,91 @@
+.onboarding {
+    padding: 30px 32px;
+    position: relative;
+    height: 100vh;
+}
+
+.nav_right a {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgba(26, 135, 221, 1);
+    transition: .3s ease-in-out;
+}
+
+.nav_right a:hover{
+    color: rgba(26, 135, 221, 0.7);
+
+}
+
+.nav_left {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.main_step {
+    margin-top: 130px;
+}
+
+.step_content h1 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+.step_content p {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.step_img {
+    width: 100%;
+    margin-bottom: 64.58px;
+}
+.step_img img {
+    width: 100%;
+}
+.slick-dots li {
+    width: 20px !important;
+    height: 5px !important;
+}
+.slick-dots li button {
+    padding: 0 !important;
+    opacity: 0.1;
+    width: 20px !important;
+    border-radius: 15px;
+    height: 5px !important;
+    background: #1a1a1a !important;
+}
+.slick-dots .slick-active button {
+    opacity: 1;
+    background: #1a87dd !important;
+}
+.slick-dots li button:before {
+    display: none;
+}
+.last_btn {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+.last_btn a {
+    display: flex;
+    width: 315px;
+    border-radius: 15px;
+    height: 50px;
+    background: #1a87dd;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px; /* 150% */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+   
+}

@@ -1,0 +1,74 @@
+.add_card {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+}
+.card_block {
+    overflow-x: hidden;
+}
+.center {
+    margin: 30px auto;
+}
+.center .slick-track {
+    overflow-x: hidden;
+}
+.center .slick-dots li {
+    width: 10px !important;
+    height: 10px !important;
+}
+.center .slick-dots li button {
+    width: 100% !important;
+    height: 100% !important;
+}
+.center .slick-dots .slick-active {
+    width: 13px !important;
+    height: 13px !important;
+}
+
+.card_block img {
+    height: 100%;
+}
+
+.card_form {
+    margin-top: 30px;
+    padding: 0 15px;
+}
+.card_form_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card_form_block div {
+    width: 48%;
+}
+.cards .sendall_btn {
+    column-gap: 10px;
+}
+.cards .detail_send {
+    width: 90%;
+}
+.card_delete {
+    background: #fb3640 !important;
+    width: 50px !important;
+    height: 50px !important;
+}
+.modal_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal_btn button {
+    width: 48%;
+    background: transparent;
+    color: #1a87dd;
+}
+.modal_btn a {
+    width: 48%;
+    padding: 14px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fb3640;
+    border-radius: 10px;
+    color: #fff;
+}

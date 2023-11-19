@@ -1,0 +1,49 @@
+.contact_main {
+    padding: 24px 15px;
+}
+.contact_body {
+    margin-bottom: 110px;
+}
+.contact_search {
+    padding: 15px;
+    border: 1px solid rgba($color: #a1a1a1, $alpha: 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 24px;
+}
+.contact_btn {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.contact_btn a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+.contact_send {
+    background: #f8bb18;
+}
+.contact_request {
+    background: #1a87dd;
+}
+.transactions_avatar-letter {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background: #f3f4f5;
+}
+.transactions_avatar-letter p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 0;
+}
