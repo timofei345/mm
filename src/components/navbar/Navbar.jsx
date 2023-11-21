@@ -10,7 +10,7 @@ function Navbar({ active }) {
     useEffect(() => {
         setActiveNavItem(active);
     }, [active]);
-    const [activeNavItem, setActiveNavItem] = useState("Home"); // Состояние для отслеживания активного пункта меню
+    const [activeNavItem, setActiveNavItem] = useState("Home"); 
 
     const navitem = [
         {

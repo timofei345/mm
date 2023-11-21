@@ -1,10 +1,13 @@
 import classNames from "classnames";
 import "./transactionsCard.scss";
 
-function TransactionsCard({ avatar, name, date, amount, type, trType }) {
+function TransactionsCard({ avatar, name, date, amount, type, trType, setIsOpen }) {
     const firstLetter = name ? name[0] : "A";
+    const openModal = () => {
+        setIsOpen(true)
+    }
     return (
-        <div className='transactions_card'>
+        <button onClick={openModal} className='transactions_card'>
             <div className='transactions_card-inner'>
                 <div className='transactions_avatar'>
                     {avatar === "any" || !avatar ? (
@@ -49,7 +52,7 @@ function TransactionsCard({ avatar, name, date, amount, type, trType }) {
                     {trType === "send" ? `- ${amount}$` : `+ ${amount}$`}
                 </span>
             </div>
-        </div>
+        </button>
     );
 }
 

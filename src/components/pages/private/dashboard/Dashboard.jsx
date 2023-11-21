@@ -14,9 +14,12 @@ import Dashboardimage from "../../../../assets/dashboardimage.svg";
 import Requestmoney from "../../../../assets/requestmoney.png";
 import Sendmoney from "../../../../assets/sendmoney.png";
 
+
 import "./dashboard.scss";
+import TransactionsModal from "../../../transactionsModal/TransactionsModal";
 
 function App() {
+    const [isOpen, setIsOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const [sendPerson, setSendPerson] = useState([]);
     const [headerDate, setHeaderDate] = useState({});
@@ -26,6 +29,7 @@ function App() {
     const validateToken = CheckAuthUser();
 
     useEffect(() => {
+
         const onboarding = localStorage.getItem("onboarding");
         if (validateToken === false) {
             navigate("/signin");
@@ -33,7 +37,9 @@ function App() {
         if (!onboarding) {
             navigate("/onboarding");
         }
-    });
+    },
+    []
+    );
 
     useEffect(() => {
         GET_ME()
@@ -48,7 +54,7 @@ function App() {
             .catch(() => {
                 dispatch(removeJwtToken());
             });
-    }, []);
+    },  [] );
 
     useEffect(() => {
         setSendPerson(transactions.filter((item) => item.trType === "send"));
@@ -57,6 +63,7 @@ function App() {
     
     return (
         <>
+        
             <Header date={headerDate} />
             <div className='dashboard'>
                 <div className='dashboard_buttons'>
@@ -85,8 +92,20 @@ function App() {
                     </div>
                     {transactions.length > 0 ? (
                         transactions.map((item, index) => {
+                            const data = 
+                            {
+                                userName: item.userName,
+                                userAvatar: item.userAvatar,
+                                trType: item.trType,
+                                trDate: item.trDate,
+                                amount: item.amount
+                            }
                             return (
-                                <TransactionsCard
+                                <article>
+                                    <TransactionsModal open={isOpen} onClose={() => setIsOpen(false)} data={data} />
+
+                                
+                                <TransactionsCard 
                                     key={index}
                                     name={item.userName}
                                     avatar={item.userAvatar}
@@ -94,7 +113,9 @@ function App() {
                                     amount={item.amount}
                                     type={item.trType}
                                     trType={item.trType}
+                                    setIsOpen={setIsOpen}
                                 />
+                                </article>
                             );
                         })
                     ) : (
