@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import InputField from "../../../inputField/InputField";
@@ -14,6 +14,13 @@ function EditProfile() {
     const [data, setData] = useState({});
     const { PUT_ME } = useService();
     const { uploadImage } = useImgBBUpload();
+    const { state } = useLocation();
+    useEffect(() => {
+        setData({
+            username: state.data.name,
+        });
+        setFile(state.data.avatar);
+    }, [state.data]);
 
     const handleSubmit = () => {
 
@@ -96,6 +103,7 @@ function EditProfile() {
                     label='User Name'
                     type='text'
                     placeholder='Enter your user name'
+                    value={data.username}
                     onChange={(e) => {
                         setData({ ...data, username: e.target.value });
                     }}

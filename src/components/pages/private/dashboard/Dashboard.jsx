@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import Header from "../../../headerDashboard/Header";
 import Navbar from "../../../navbar/Navbar";
@@ -14,22 +15,19 @@ import Dashboardimage from "../../../../assets/dashboardimage.svg";
 import Requestmoney from "../../../../assets/requestmoney.png";
 import Sendmoney from "../../../../assets/sendmoney.png";
 
-
 import "./dashboard.scss";
-import TransactionsModal from "../../../transactionsModal/TransactionsModal";
 
 function App() {
-    const [isOpen, setIsOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const [sendPerson, setSendPerson] = useState([]);
     const [headerDate, setHeaderDate] = useState({});
+    const [notifyData, setNotifyData] = useState([]);
     const navigate = useNavigate();
     const { GET_ME } = useService();
     const dispatch = useDispatch();
     const validateToken = CheckAuthUser();
 
     useEffect(() => {
-
         const onboarding = localStorage.getItem("onboarding");
         if (validateToken === false) {
             navigate("/signin");
@@ -37,9 +35,7 @@ function App() {
         if (!onboarding) {
             navigate("/onboarding");
         }
-    },
-    []
-    );
+    }, []);
 
     useEffect(() => {
         GET_ME()
@@ -50,21 +46,42 @@ function App() {
                     name: res.username,
                     avatar: res.avatar,
                 });
+                const notifyArray = res.notifications;
+                res.transactions.filter((item) => {
+                    notifyArray.map((notify) => {
+                        if (notify.tradingCode === item.tradingCode) {
+                            setNotifyData((prev) => [...prev, item]);
+                           
+                        }
+                    });
+                });
             })
             .catch(() => {
                 dispatch(removeJwtToken());
             });
-    },  [] );
+    }, [setNotifyData]);
 
+    const checkNotify = () => {
+       if(notifyData <= 0){
+        toast.error("You don't have any notification!", {
+            position: "bottom-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+       }
+    }
     useEffect(() => {
         setSendPerson(transactions.filter((item) => item.trType === "send"));
     }, [transactions]);
 
-    
     return (
         <>
-        
-            <Header date={headerDate} />
+            <Header date={headerDate} notifyData={notifyData} checkNotify={checkNotify} />
             <div className='dashboard'>
                 <div className='dashboard_buttons'>
                     <Link
@@ -92,20 +109,8 @@ function App() {
                     </div>
                     {transactions.length > 0 ? (
                         transactions.map((item, index) => {
-                            const data = 
-                            {
-                                userName: item.userName,
-                                userAvatar: item.userAvatar,
-                                trType: item.trType,
-                                trDate: item.trDate,
-                                amount: item.amount
-                            }
                             return (
-                                <article>
-                                    <TransactionsModal open={isOpen} onClose={() => setIsOpen(false)} data={data} />
-
-                                
-                                <TransactionsCard 
+                                <TransactionsCard
                                     key={index}
                                     name={item.userName}
                                     avatar={item.userAvatar}
@@ -113,9 +118,7 @@ function App() {
                                     amount={item.amount}
                                     type={item.trType}
                                     trType={item.trType}
-                                    setIsOpen={setIsOpen}
                                 />
-                                </article>
                             );
                         })
                     ) : (

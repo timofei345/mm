@@ -1,13 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import NotificationsIcon from "../../assets/notificationsicon.svg";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./header.scss";
 
-function Header({ date }) {
+function Header({ date, notifyData, checkNotify }) {
     const firstLetter = date.name ? date.name[0] : "A";
+    console.log(notifyData)
+
     return (
         <div className='header_dashboard'>
+            <ToastContainer
+                position='bottom-center'
+                autoClose={2500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+            />
             <div className='header_top'>
                 <div className='header_name'>
                     <p>Dashboard</p>
@@ -30,9 +47,14 @@ function Header({ date }) {
                     <h1>${date.amount}</h1>
                 </div>
 
-                <div className='notifications_icon'>
+                <Link
+                    onClick={checkNotify}
+                    to={notifyData.length > 0 ? "/notify" : "/"}
+                    className='notifications_icon'
+                    state={{ notifyData }}
+                >
                     <img src={NotificationsIcon} alt='notifications_icon' />
-                </div>
+                </Link>
             </div>
         </div>
     );

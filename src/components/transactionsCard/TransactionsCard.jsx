@@ -1,12 +1,26 @@
 import classNames from "classnames";
 import "./transactionsCard.scss";
+import TransactionsModal from "../transactionsModal/TransactionsModal";
+import { useState } from "react";
 
-function TransactionsCard({ avatar, name, date, amount, type, trType, setIsOpen }) {
+function TransactionsCard({ avatar, name, date, amount, type, trType, }) {
+    const [isOpen, setIsOpen] = useState(false);
     const firstLetter = name ? name[0] : "A";
+    const data = 
+                            {
+                                userName: name,
+                                userAvatar: avatar,
+                                trType: type,
+                                trDate: date,
+                                amount: amount
+                            }
     const openModal = () => {
         setIsOpen(true)
     }
     return (
+        <article>
+             <TransactionsModal open={isOpen} onClose={() => setIsOpen(false)} data={data} />
+
         <button onClick={openModal} className='transactions_card'>
             <div className='transactions_card-inner'>
                 <div className='transactions_avatar'>
@@ -53,6 +67,7 @@ function TransactionsCard({ avatar, name, date, amount, type, trType, setIsOpen 
                 </span>
             </div>
         </button>
+        </article>
     );
 }
 

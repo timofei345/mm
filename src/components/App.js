@@ -29,7 +29,7 @@ import EditProfile from "./pages/private/editProfile/EditProfile";
 import Cards from "./pages/private/card/Card";
 import AddCard from "./pages/private/card/AddCard";
 import Setting from "./pages/private/settings/setting";
-
+import Notify from './pages/private/notify/notify';
 
 function App() {
 
@@ -105,6 +105,10 @@ function App() {
     {
       element: <Setting />,
       path: '/setting'
+    },
+    {
+      element: <Notify />,
+      path: '/notify'
     }
   ];
 

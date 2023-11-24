@@ -45,13 +45,17 @@ function Profile() {
             title: "Help",
         },
     ];
-
+    const data ={
+        name: name,
+        avatar: avatar
+    }
     return (
         <section className='profile'>
             <div className='profile_header'>
                 <div className='profile_top'>
                     <h3>My Profile</h3>
-                    <Link to='/editprofile' className='profile_edit'>
+                    <Link to='/editprofile' className='profile_edit' state={{data}}
+                    >
                         <svg
                             width='18'
                             height='18'
