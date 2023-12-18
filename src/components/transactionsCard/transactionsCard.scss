@@ -68,3 +68,8 @@
     font-weight: 600;
     line-height: 24px; /* 150% */
 }
+.transaction_info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

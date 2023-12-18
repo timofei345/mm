@@ -15,8 +15,8 @@ import SplashScreen from "./pages/public/splashScreen/SplashScreen";
 
 import ErrorPage from "./pages/errors/ErrorPage";
 
-// eslint-disable-next-line no-unused-vars
-import appStyle from "../scss/app.scss";
+
+import  "../scss/global.scss";
 import Start from "./pages/public/Start/Start";
 import Contact from "./pages/private/contact/Contact";
 import Send from "./pages/private/send/Send";

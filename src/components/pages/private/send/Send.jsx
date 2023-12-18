@@ -1,35 +1,62 @@
 import { Link, useLocation} from "react-router-dom";
 import HeaderPrivate from "../../../headerPrivate/Headerprivate";
 import "./send.scss";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function Send() {
     const [transactionType] = useState("incomes");
+    const [amount, setAmount] = useState(0);
     const { state } = useLocation();
 
 
-    const sortedTransactions = [...state.sendPerson].sort((a, b) => {
-        const dateA = new Date(a.trDate.split(".").reverse().join("-"));
-        const dateB = new Date(b.trDate.split(".").reverse().join("-"));
 
-        return dateB - dateA; // Sorting in descending order, change to dateA - dateB for ascending
+
+    const sortedTransactions = [...state.sendPerson].sort((a, b) => {
+        const dateA = new Date(
+            a.trDate.split(" ")[0].split(".").reverse().join("-")
+        );
+        const dateB = new Date(
+            b.trDate.split(" ")[0].split(".").reverse().join("-")
+        );
+
+        return dateB - dateA;
     });
 
     const filteredTransactions = sortedTransactions.filter((item) => {
         return transactionType === "incomes"
-            ? item.trType === "send"
-            : item.trType === "request";
+            ? item.trType === "request"
+            : item.trType === "in";
     });
 
     const transactionsByMonth = filteredTransactions.reduce(
         (acc, transaction) => {
-            const monthYear = transaction.trDate.split(".").slice(1).join("-");
+            const monthYear = transaction.trDate
+                .split(" ")[0]
+                .split(".")
+                .slice(1)
+                .join("-");
             acc[monthYear] = acc[monthYear] || [];
             acc[monthYear].push(transaction);
             return acc;
         },
         {}
     );
+    const sortedMonths = Object.keys(transactionsByMonth).sort((a, b) => {
+        const dateA = new Date(a.split("-")[1], a.split("-")[0] - 1);
+        const dateB = new Date(b.split("-")[1], b.split("-")[0] - 1);
+        return dateB - dateA;
+    });
+    
+    useEffect(() => {
+        for (const key in transactionsByMonth) {
+            if (transactionsByMonth.hasOwnProperty(key) && Array.isArray(transactionsByMonth[key])) {
+              transactionsByMonth[key].forEach(item => {
+                setAmount((prev) => prev += item.amount)
+              });
+            }
+          }
+
+}, [] )
     return (
         <div className='body_container'>
             <HeaderPrivate title='Send Money' />
@@ -51,12 +78,11 @@ function Send() {
             </div>
             <div className='total_send'>
                 <h3>
-                    Total Amount: <span>$158</span>
+                    Total Amount: <span>{amount} $</span>
                 </h3>
             </div>
             <div className='sendm_main'>
-                {Object.entries(transactionsByMonth).map(
-                    ([monthYear, monthTransactions]) => (
+            {sortedMonths.map((monthYear) => (
                         <div key={monthYear} className='month-section'>
                             <h3>
                                 {new Date(
@@ -67,7 +93,7 @@ function Send() {
                                     year: "numeric",
                                 })}
                             </h3>
-                            {monthTransactions.map((item, index) => (
+                            {transactionsByMonth[monthYear].map((item, index) => (
                                 <ContactCard
                                     key={`${monthYear}-${index}`}
                                     username={item.userName}

@@ -8,7 +8,7 @@ import useService from "../../../../services/requests";
 
 function Transactions() {
     const [transactions, setTransactions] = useState([]);
-    const [transactionType, setTransactionType] = useState("incomes"); // Добавлено состояние для отслеживания типа транзакций
+    const [transactionType, setTransactionType] = useState("incomes");
     const { GET_ME } = useService();
 
     useEffect(() => {
@@ -19,28 +19,39 @@ function Transactions() {
     }, [setTransactions]);
 
     const sortedTransactions = [...transactions].sort((a, b) => {
-        const dateA = new Date(a.trDate.split(".").reverse().join("-"));
-        const dateB = new Date(b.trDate.split(".").reverse().join("-"));
+        const dateA = new Date(
+            a.trDate.split(" ")[0].split(".").reverse().join("-")
+        );
+        const dateB = new Date(
+            b.trDate.split(" ")[0].split(".").reverse().join("-")
+        );
 
-        return dateB - dateA; // Sorting in descending order, change to dateA - dateB for ascending
+        return dateB - dateA;
     });
-
     const filteredTransactions = sortedTransactions.filter((item) => {
         return transactionType === "incomes"
-            ? item.trType === "send"
-            : item.trType === "request";
+            ? item.trType === "out"
+            : item.trType === "in";
     });
 
     const transactionsByMonth = filteredTransactions.reduce(
         (acc, transaction) => {
-            const monthYear = transaction.trDate.split(".").slice(1).join("-");
+            const monthYear = transaction.trDate
+                .split(" ")[0]
+                .split(".")
+                .slice(1)
+                .join("-");
             acc[monthYear] = acc[monthYear] || [];
             acc[monthYear].push(transaction);
             return acc;
         },
         {}
     );
-
+    const sortedMonths = Object.keys(transactionsByMonth).sort((a, b) => {
+        const dateA = new Date(a.split("-")[1], a.split("-")[0] - 1);
+        const dateB = new Date(b.split("-")[1], b.split("-")[0] - 1);
+        return dateB - dateA;
+    });
     return (
         <section className='body_container'>
             <HeaderPrivate title={"Transaction"} />
@@ -75,19 +86,19 @@ function Transactions() {
                 </div>
 
                 <div className='transactions_history'>
-                    {Object.entries(transactionsByMonth).map(
-                        ([monthYear, monthTransactions]) => (
-                            <div key={monthYear} className='month-section'>
-                                <h3>
-                                    {new Date(
-                                        monthYear.split("-")[1],
-                                        monthYear.split("-")[0] - 1
-                                    ).toLocaleString("en-US", {
-                                        month: "long",
-                                        year: "numeric",
-                                    })}
-                                </h3>
-                                {monthTransactions.map((item, index) => (
+                    {sortedMonths.map((monthYear) => (
+                        <div key={monthYear} className='month-section'>
+                            <h3>
+                                {new Date(
+                                    monthYear.split("-")[1],
+                                    monthYear.split("-")[0] - 1
+                                ).toLocaleString("en-US", {
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </h3>
+                            {transactionsByMonth[monthYear].map(
+                                (item, index) => (
                                     <TransactionsCard
                                         key={`${monthYear}-${index}`}
                                         avatar={item.userAvatar}
@@ -96,10 +107,10 @@ function Transactions() {
                                         amount={item.amount}
                                         trType={item.trType}
                                     />
-                                ))}
-                            </div>
-                        )
-                    )}
+                                )
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
 

@@ -34,8 +34,8 @@ function TransactionsCard({ avatar, name, date, amount, type, trType, }) {
                     {type ? (
                         <div
                             className={classNames("transactions_type", {
-                                type_operation_down: type === "request",
-                                type_operation_up: type === "send",
+                                type_operation_down: type === "in",
+                                type_operation_up: type === "out",
                             })}
                         >
                             <svg
@@ -57,13 +57,13 @@ function TransactionsCard({ avatar, name, date, amount, type, trType, }) {
                         <h3>{name}</h3>
                     </div>
                     <div className='transactions_date'>
-                        <p>{date}</p>
+                        <p>{date.split(" ")[0]}</p>
                     </div>
                 </div>
             </div>
             <div className='transactions_amount'>
                 <span>
-                    {trType === "send" ? `- ${amount}$` : `+ ${amount}$`}
+                    {trType === "out" ? `- ${amount}$` : `+ ${amount}$`}
                 </span>
             </div>
         </button>

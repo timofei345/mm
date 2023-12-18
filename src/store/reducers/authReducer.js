@@ -12,6 +12,7 @@ const authReducer = (state = initialState, action) => {
                 jwtToken: action.payload,
             };
         case 'CLEAR_JWT_TOKEN':
+            localStorage.removeItem("jwt");
             return {
                 ...state,
                 jwtToken: "",

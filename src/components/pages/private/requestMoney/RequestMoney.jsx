@@ -25,7 +25,7 @@ function RequestMoney() {
             amount,
             username: state.info.username,
             avatar: state.info.avatar,
-            type: "request",
+            type: "in",
         };
         const result = SendTransactions(date);
         POST_TRANSACTIONS(result).then((res) => {
@@ -65,9 +65,7 @@ function RequestMoney() {
                     <div className='transactions_name'>
                         <h3>{state.info.username}</h3>
                     </div>
-                    <div className='transactions_date'>
-                        <p>{state.info.email}</p>
-                    </div>
+                  
                 </div>
             </div>
             <div className='detail_form'>

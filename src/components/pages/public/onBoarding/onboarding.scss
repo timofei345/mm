@@ -2,6 +2,13 @@
     padding: 30px 32px;
     position: relative;
     height: 100vh;
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .nav_right a {

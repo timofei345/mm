@@ -59,7 +59,7 @@ function App() {
             .catch(() => {
                 dispatch(removeJwtToken());
             });
-    }, [setNotifyData]);
+    }, []);
 
     const checkNotify = () => {
        if(notifyData <= 0){
@@ -76,7 +76,7 @@ function App() {
        }
     }
     useEffect(() => {
-        setSendPerson(transactions.filter((item) => item.trType === "send"));
+        setSendPerson(transactions.filter((item) => item.trType === "request"));
     }, [transactions]);
 
     return (

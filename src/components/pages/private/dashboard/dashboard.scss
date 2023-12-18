@@ -1,6 +1,6 @@
 .dashboard {
     padding: 0 15px;
-    padding-top: 245px;
+    padding-top: 250px;
     padding-bottom: 70px;
 }
 .dashboard_buttons {
@@ -39,6 +39,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .dashboard_last_trasactions {
@@ -62,4 +63,11 @@
     text-align: center;
     opacity: 50%;
     margin-top: 16px;
+}
+
+.viewall_button a{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3491DB;
 }

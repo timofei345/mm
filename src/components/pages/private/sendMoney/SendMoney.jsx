@@ -27,7 +27,7 @@ function SendMoney() {
             amount,
             username: state.info.username,
             avatar: state.info.avatar,
-            type: "send",
+            type: "out",
         };
         const result = SendTransactions(date);
         POST_TRANSACTIONS(result).then(() => {

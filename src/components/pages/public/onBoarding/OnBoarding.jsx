@@ -31,7 +31,7 @@ function OnBoarding() {
                 </div>
                 {number !== 3 ? (
                     <div className='nav_right'>
-                        <Link to='/signin' onClick={checkedonboarding}>
+                        <Link to='/start' onClick={checkedonboarding}>
                             Skip
                         </Link>
                     </div>
@@ -82,7 +82,7 @@ function OnBoarding() {
             </Slider>
             {number === 3 ? (
                 <div className='last_btn'>
-                    <Link to='/signin' onClick={checkedonboarding}>
+                    <Link to='/start' onClick={checkedonboarding}>
                         Get Started
                     </Link>
                 </div>

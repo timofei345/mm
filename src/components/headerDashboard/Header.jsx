@@ -9,7 +9,7 @@ import "./header.scss";
 
 function Header({ date, notifyData, checkNotify }) {
     const firstLetter = date.name ? date.name[0] : "A";
-    console.log(notifyData)
+
 
     return (
         <div className='header_dashboard'>
